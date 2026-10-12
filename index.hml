@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aşkım, sana ♥</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins',sans-serif;color:#fff;background:linear-gradient(160deg,#2a0614,#5c0f2e 45%,#8e1f4b);background-attachment:fixed;min-height:100vh;overflow-x:hidden;text-align:center}
+.bg-heart{position:fixed;bottom:-40px;color:rgba(255,140,180,.35);pointer-events:none;animation:rise linear forwards;z-index:0}
+@keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+.pop{position:fixed;color:#ff5c93;pointer-events:none;z-index:50;animation:pop 1.6s ease-out forwards}
+@keyframes pop{0%{opacity:1;transform:translate(0,0) scale(.5)}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.6)}}
+section{position:relative;z-index:1;max-width:520px;margin:0 auto;padding:70px 22px;opacity:0;transform:translateY(40px);transition:all 1s ease}
+section.show{opacity:1;transform:none}
+h1,h2{font-family:'Dancing Script',cursive;font-weight:700}
+h1{font-size:64px;line-height:1.1;text-shadow:0 0 25px rgba(255,92,147,.7)}
+h2{font-size:42px;margin-bottom:22px;color:#ffc2d6}
+.sub{font-weight:300;opacity:.85;margin-top:10px}
+#name{font-family:'Dancing Script',cursive;font-size:40px;color:#ff8fb3;min-height:55px;margin-top:14px}
+#name::after{content:'|';animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
+.big-heart{font-size:120px;color:#ff3d7f;cursor:pointer;display:inline-block;margin-top:30px;animation:beat 1.2s infinite;filter:drop-shadow(0 0 25px rgba(255,61,127,.8));user-select:none}
+@keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.15)}30%{transform:scale(1)}45%{transform:scale(1.1)}}
+#hc{margin-top:10px;font-size:15px;opacity:.9;min-height:24px}
+.glass{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:22px;padding:24px;backdrop-filter:blur(8px)}
+.btn{font-family:'Poppins';font-size:16px;color:#fff;background:linear-gradient(135deg,#ff3d7f,#c2185b);border:none;border-radius:50px;padding:14px 32px;cursor:pointer;box-shadow:0 8px 25px rgba(255,61,127,.45);transition:transform .2s}
+.btn:active{transform:scale(.94)}
+.envelope{font-size:90px;cursor:pointer;display:inline-block;animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12px)}}
+#letter{max-height:0;overflow:hidden;transition:max-height 1.5s ease;text-align:left}
+#letter.open{max-height:1500px}
+#letter .paper{background:#fff6f9;color:#5c0f2e;border-radius:18px;padding:26px;margin-top:20px;line-height:1.8;font-size:15.5px}
+#letter .paper p{margin-bottom:14px}
+#letter .hi,#letter .sign{font-family:'Dancing Script';font-size:28px;color:#c2185b}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{height:160px;perspective:800px;cursor:pointer}
+.inner{position:relative;width:100%;height:100%;transition:transform .7s;transform-style:preserve-3d}
+.card.flip .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;backface-visibility:hidden}
+.front{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)}
+.front span{font-size:38px}.front b{font-weight:500;margin-top:8px;font-size:15px}
+.back{background:linear-gradient(135deg,#ff3d7f,#9c1450);transform:rotateY(180deg);font-size:14px;line-height:1.5}
+#reason{font-family:'Dancing Script';font-size:30px;min-height:120px;display:flex;align-items:center;justify-content:center;transition:opacity .4s}
+.bar{height:26px;background:rgba(255,255,255,.12);border-radius:20px;overflow:hidden;margin:22px 0 12px}
+#fill{height:100%;width:0;background:linear-gradient(90deg,#ff8fb3,#ff3d7f);border-radius:20px;transition:width .1s}
+#pct{font-family:'Dancing Script';font-size:44px;min-height:60px}
+#meterText{opacity:.9;min-height:24px}
+.fut{display:flex;align-items:center;gap:14px;padding:15px 6px;border-bottom:1px solid rgba(255,255,255,.12);cursor:pointer;text-align:left;font-size:16px}
+.fut i{font-style:normal;font-size:24px;color:rgba(255,255,255,.35);transition:all .3s}
+.fut.done i{color:#ff3d7f;transform:scale(1.3)}
+.fut.done span{opacity:.6}
+#zone{position:relative;height:200px}
+#yes{position:absolute;left:18%;top:40px}
+#no{position:absolute;right:15%;top:40px;background:rgba(255,255,255,.15);box-shadow:none;transition:all .25s}
+#final{position:fixed;inset:0;background:rgba(42,6,20,.94);z-index:40;display:none;flex-direction:column;align-items:center;justify-content:center;padding:30px}
+#final h1{font-size:58px;animation:beat 1.4s infinite}
+#final p{margin-top:20px;font-size:17px;line-height:1.7;max-width:420px}
+footer{position:relative;z-index:1;padding:40px 20px 60px;font-family:'Dancing Script';font-size:26px;color:#ffc2d6}
+</style>
+</head>
+<body>
+
+<section class="show">
+<p class="sub">Dünyanın en güzel kalbine</p>
+<h1>Seni seviyorum</h1>
+<div id="name"></div>
+<div class="big-heart" id="bh">♥</div>
+<p id="hc">Kalbime dokun</p>
+</section>
+
+<section>
+<h2>Sana bir mektubum var</h2>
+<div class="envelope" id="env">✉</div>
+<p class="sub" id="envT">Zarfa dokun, meleğim</p>
+<div id="letter"><div class="paper">
+<p class="hi">Aşkım, hayatım, meleğim,</p>
+<p>Bunu yazarken kalbim sıkışıyor. Bugün, dün ve son günlerde sana çok haksızlık ettim. Sinir bozucuydum, saygısızdım ve seni kırdım.</p>
+<p>Özellikle bugün gerçekten çok kötüydüm. Bunun için senden çok ama çok özür dilerim. Hiçbir bahanem yok.</p>
+<p>Sen benim ömrümsün, sevgilim. Dünyada en çok sevdiğim, en değerli insansın. Sana en güzel şekilde davranmam gerekirken seni üzdüm ve bu beni çok üzüyor.</p>
+<p>Sana söz veriyorum: Sadece sözlerle değil, davranışlarımla da daha iyi biri olacağım. Sana layık olmak için elimden gelen her şeyi yapacağım.</p>
+<p>Seni her şeyden çok seviyorum. Benim için sen her şeysin.</p>
+<p class="sign">Sonsuza dek senin ♥</p>
+</div></div>
+</section>
+
+<section>
+<h2>Güzel zamanlarımız</h2>
+<div class="cards" id="cards"></div>
+<p class="sub" style="margin-top:16px">Kartlara dokun, bir tanem</p>
+</section>
+
+<section>
+<h2>Seni neden seviyorum?</h2>
+<div class="glass">
+<div id="reason">Çünkü sen sensin…</div>
+<button class="btn" id="rb">Bir sebep daha ♥</button>
+</div>
+</section>
+
+<section>
+<h2>Seni ne kadar seviyorum?</h2>
+<div class="glass">
+<div class="bar"><div id="fill"></div></div>
+<div id="pct">%0</div>
+<p id="meterText"></p><br>
+<button class="btn" id="mb">Ölç, hayatım</button>
+</div>
+</section>
+
+<section>
+<h2>Önümüzdeki günlerimiz</h2>
+<div class="glass" id="fl"></div>
+</section>
+
+<section>
+<h2>Beni affeder misin, ömrüm?</h2>
+<div id="zone">
+<button class="btn" id="yes">Evet ♥</button>
+<button class="btn" id="no">Hayır</button>
+</div>
+</section>
+
+<footer>Aşkım, sevgilim, hayatım, meleğim, ömrüm… hepsi sensin ♥</footer>
+
+<div id="final">
+<h1>Seni seviyorum ömrüm ♥</h1>
+<p>Teşekkür ederim meleğim. Bir daha seni böyle üzmemek için her gün çabalayacağım. Sen benim her şeyimsin.</p>
+<br><button class="btn" id="close">Sonsuza dek ♥</button>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+function bg(){const h=document.createElement('div');h.className='bg-heart';h.textContent='♥';h.style.left=Math.random()*100+'vw';h.style.fontSize=(12+Math.random()*26)+'px';h.style.animationDuration=(7+Math.random()*7)+'s';document.body.appendChild(h);setTimeout(()=>h.remove(),15000)}
+setInterval(bg,450);
+function burst(x,y,n){for(let i=0;i<n;i++){const h=document.createElement('div');h.className='pop';h.textContent='♥';h.style.left=x+'px';h.style.top=y+'px';h.style.fontSize=(16+Math.random()*22)+'px';h.style.setProperty('--x',(Math.random()*260-130)+'px');h.style.setProperty('--y',(-80-Math.random()*220)+'px');document.body.appendChild(h);setTimeout(()=>h.remove(),1700)}}
+function at(el,n){const r=el.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,n)}
+
+const names=['aşkım','sevgilim','hayatım','meleğim','ömrüm','bir tanem','canım','her şeyim'];
+let ni=0,ci=0,del=false;
+(function type(){const w=names[ni];$('name').textContent=w.slice(0,ci);
+if(!del&&ci<w.length){ci++;setTimeout(type,120)}else if(!del){del=true;setTimeout(type,1400)}
+else if(ci>0){ci--;setTimeout(type,60)}else{del=false;ni=(ni+1)%names.length;setTimeout(type,300)}})();
+
+const hm=['Seni seviyorum aşkım','Her gün daha çok','Sen benim evimsin','Kalbim sadece senin','Sensiz yapamam meleğim','Ömrüm sensin','Sonsuza dek sen'];
+let cnt=0;$('bh').onclick=e=>{cnt++;$('hc').textContent=hm[(cnt-1)%hm.length]+' ♥ '+cnt;burst(e.clientX,e.clientY,14)};
+
+$('env').onclick=()=>{$('letter').classList.add('open');$('env').textContent='💌';$('envT').textContent='Lütfen sonuna kadar oku…';at($('env'),20)};
+
+const cd=[['☕','İlk buluşmamız','O gün kalbim yerinden çıkacak gibiydi. O anı hiç unutmadım.'],['📸','Buluşmalarımız','Seninle her buluşma hayatımın en güzel anı.'],['😊','Gülüşün','Dünyadaki en sevdiğim ses, en güzel manzara.'],['🤗','Sarılmamız','Kollarında dünyanın en güvenli yerindeyim.'],['✨','Bakışların','Gözlerine baktığımda her şeyi unutuyorum.'],['💞','Biz','Seninle her şey tam, her şey doğru.']];
+cd.forEach(c=>{const d=document.createElement('div');d.className='card';d.innerHTML='<div class="inner"><div class="face front"><span>'+c[0]+'</span><b>'+c[1]+'</b></div><div class="face back">'+c[2]+'</div></div>';d.onclick=()=>{d.classList.toggle('flip');at(d,6)};$('cards').appendChild(d)});
+
+const rs=['Gülüşün dünyamı aydınlattığı için.','Kötü günlerimde bile yanımda olduğun için.','Beni olduğum gibi sevdiğin için.','Gözlerine her baktığımda sana yeniden aşık olduğum için.','Sesin bana huzur verdiği için.','Kalbin dünyanın en güzel kalbi olduğu için.','Hak etmediğimde bile bana sabır gösterdiğin için.','Seninle geçen her saniye bir ömre bedel olduğu için.','Sen benim evim olduğun için.','Sensiz bir hayat düşünemediğim için.'];
+let ri=-1;$('rb').onclick=e=>{ri=(ri+1)%rs.length;$('reason').style.opacity=0;setTimeout(()=>{$('reason').textContent=rs[ri];$('reason').style.opacity=1},400);burst(e.clientX,e.clientY,8)};
+
+$('mb').onclick=()=>{let p=0;$('meterText').textContent='';const t=setInterval(()=>{p+=p<100?2:25;$('fill').style.width=Math.min(p,100)+'%';$('pct').textContent='%'+p;
+if(p>=1000){clearInterval(t);$('pct').textContent='∞';$('meterText').textContent='Ölçülemez. Kelimeler yetmez, sayılar bitmez.';at($('pct'),30)}},30)};
+
+const fu=['Birlikte dünyayı gezmek','Sana özel unutulmaz bir buluşma','Film, battaniye ve sarılmalarla uzun akşamlar','Gün batımında el ele yürümek','Yeni anılar biriktirmek','Bir ömür boyu yan yana','Birlikte yaşlanmak'];
+fu.forEach(t=>{const d=document.createElement('div');d.className='fut';d.innerHTML='<i>♥</i><span>'+t+'</span>';d.onclick=()=>{d.classList.toggle('done');if(d.classList.contains('done'))at(d,7)};$('fl').appendChild(d)});
+
+const noT=['Emin misin?','Gerçekten mi?','Bir daha düşün','Lütfen aşkım','Kalbimi kırma','Yakalayamazsın'];let nc=0;
+function run(e){if(e)e.preventDefault();const z=$('zone').getBoundingClientRect(),b=$('no');b.style.left=Math.random()*(z.width-130)+'px';b.style.top=Math.random()*(z.height-55)+'px';b.style.right='auto';b.textContent=noT[nc++%noT.length];const y=$('yes');const s=1+Math.min(nc,6)*0.1;y.style.transform='scale('+s+')'}
+$('no').addEventListener('touchstart',run);$('no').addEventListener('mouseenter',run);$('no').addEventListener('click',run);
+
+$('yes').onclick=()=>{$('final').style.display='flex';let k=0;const t=setInterval(()=>{burst(Math.random()*innerWidth,innerHeight*0.7,10);if(++k>15)clearInterval(t)},200)};
+$('close').onclick=()=>{$('final').style.display='none'};
+
+const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')}),{threshold:.15});
+document.querySelectorAll('section').forEach(s=>ob.observe(s));
+</script>
+</body>
+</html>
